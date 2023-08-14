@@ -45,6 +45,6 @@ userSchema.method('toJSON',function(){
 })
 
 
-export default model("Usuarios",userSchema);
+export default model("usuarios",userSchema);
 
 

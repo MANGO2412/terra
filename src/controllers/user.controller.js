@@ -1,9 +1,9 @@
 // s
-import Usuarios from "../models/usuarios.js"
+import usuarios from "../models/Usuarios.js";
 //insert 
 export const createUser=async (req,res)=>{
     try {
-        const user=new Usuarios(req.body)
+        const user=new usuarios(req.body)
         const userSaved= await user.save()
         return res.json(userSaved)
     } catch (error) {
@@ -24,7 +24,7 @@ export const updateUser=async(req,res)=>{
       const {id}=req.params;
 
       try {
-        const update=await Usuarios.findByIdAndUpdate(id,req.body);
+        const update=await usuarios.findByIdAndUpdate(id,req.body);
       
         if (!update)
             return res.status(404).json({
@@ -43,7 +43,7 @@ export const updateUser=async(req,res)=>{
 //find all
 export const findAllUser=async(req,res)=>{
     try {
-      const users=await Usuarios.find();  
+      const users=await usuarios.find();  
       return res.json(users)
     } catch (error) {
       res.status(500).json({
@@ -57,7 +57,7 @@ export const findAllUser=async(req,res)=>{
 export  const log=async(req,res)=>{
    try {
       const {correo,contrasena}=req.body
-      const data=await Usuarios.find({correo,contrasena})
+      const data=await usuarios.find({correo,contrasena})
        
       if (!data)
       return res.status(404).json({
@@ -80,7 +80,7 @@ export const deleteUser=async (req,res)=>{
    const id=req.params.id;
 
    try {
-     const data=await Usuarios.findByIdAndDelete(id);
+     const data=await usuarios.findByIdAndDelete(id);
      
   
      if(!data){
