@@ -29,6 +29,8 @@ router.post("/update/:id",updateUser)
 //delete
 router.post("/delete/:id",deleteUser);
 
+//adopcion
+
 
 
 //log
