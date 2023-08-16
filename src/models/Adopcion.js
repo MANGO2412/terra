@@ -10,6 +10,10 @@ const AdoptSchema=new Schema({
      type:String,
      required:true,
      trim:true
+   },
+   status:{
+     type:Boolean,
+     required:true
    }
 },
 {

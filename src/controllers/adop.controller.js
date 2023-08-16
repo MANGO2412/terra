@@ -2,8 +2,10 @@ import Adopcion from "../models/Adopcion.js";
 
 //insert 
 export const createAdopt=async (req,res)=>{
+    const data=req.body;
+    data.status=false
     try {
-        const adop=new Adopcion(req.body)
+        const adop=new Adopcion(data)
         const adopSaved= await adop.save()
         return res.json(adopSaved)
     } catch (error) {
