@@ -33,13 +33,12 @@ router.post("/update/:id",updateAdop)
 
 
 //delete
-router.post("/delete/:id",deleteUser);
+router.post("/delete/:id",deleteAdop);
 
 //adopcion
 
 
 
 //log
-router.post('/login',log)
 
 export default router
