@@ -2,14 +2,14 @@ import { Schema,model } from "mongoose";
 
 const AdoptSchema=new Schema({
    usuario:{
-     type:String,
-     required:true,
-     trim:true
+    type: Schema.Types.ObjectId,  // Cambio aquí
+    ref: "usuarios",              // Referencia al modelo de Usuario
+    required: true,
    },
    mascota:{
-     type:String,
-     required:true,
-     trim:true
+    type: Schema.Types.ObjectId,  // Cambio aquí
+    ref: "mascotas",              // Referencia al modelo de Usuario
+    required: true,
    },
    status:{
      type:Boolean,
