@@ -4,6 +4,7 @@ import {
  findAllMas,
  deleteMas,
  updateMas,
+ byID
 } from '../controllers/mascot.controller.js'
 
 
@@ -16,7 +17,7 @@ const router=Router();
 router.get('/', findAllMas)
 
 //getby id
-router.get('/:id',)
+router.get('/:id',byID)
 
 
 

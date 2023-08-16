@@ -86,8 +86,16 @@ export const deleteMas=async (req,res)=>{
 
 
 //find by id
-export const byID = async ()=>{
-
+export const byID = async (req,res)=>{
+  const id=req.params.id;
+  try {
+    const pet=await Mascotas.findById(id);  
+    return res.json(pet)
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Something went wrong retrieving the  pets",
+    }); 
+  }
   
 }
 
