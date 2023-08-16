@@ -1,11 +1,11 @@
-import Mascotas from "../models/Mascotas.js";
+import Vacuna from '../models/Vacuna.js';
 
-//insert 
-export const createMascotas=async (req,res)=>{
+
+export const createVaccune=async (req,res)=>{
     try {
-        const anim=new Mascotas(req.body)
-        const animSaved= await anim.save()
-        return res.json(animSaved)
+        const vac=new Vacuna(req.body)
+        const vacSaved= await vac.save()
+        return res.json(vacSaved)
     } catch (error) {
         res.status(500).json({
             message: error.message || "Something went wrong creating the animal",
@@ -14,7 +14,7 @@ export const createMascotas=async (req,res)=>{
 }
 
 //update 
-export const updateMas=async(req,res)=>{
+export const updateVac=async(req,res)=>{
       if(!req.body){
           return res.status(400).send({
             message:"Data update cannot bet empty"
@@ -24,7 +24,7 @@ export const updateMas=async(req,res)=>{
       const {id}=req.params;
 
       try {
-        const update=await Mascotas.findByIdAndUpdate(id,req.body);
+        const update=await Vacuna.findByIdAndUpdate(id,req.body);
       
         if (!update)
             return res.status(404).json({
@@ -41,10 +41,10 @@ export const updateMas=async(req,res)=>{
 }
 
 //find all
-export const findAllMas=async(req,res)=>{
+export const findAllVac=async(req,res)=>{
     try {
-      const pet=await Mascotas.find();  
-      return res.json(pet)
+      const vac=await Vacuna.find();  
+      return res.json(vac)
     } catch (error) {
       res.status(500).json({
         message: error.message || "Something went wrong retrieving the  pets",
@@ -54,18 +54,12 @@ export const findAllMas=async(req,res)=>{
 
 
 
-
-//email and password
-
-
-
-//finde by emali and password
 //delete
-export const deleteMas=async (req,res)=>{
+export const deleteVac=async (req,res)=>{
    const id=req.params.id;
 
    try {
-     const data=await Mascotas.findByIdAndDelete(id);
+     const data=await Vacuna.findByIdAndDelete(id);
      
   
      if(!data){
@@ -82,12 +76,5 @@ export const deleteMas=async (req,res)=>{
       message: error.message|| `Could not delete pets with id = ${id}`,
     });
    }
-}
-
-
-//find by id
-export const byID = async ()=>{
-
-  
 }
 

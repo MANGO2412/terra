@@ -15,6 +15,11 @@ const router=Router();
 //get
 router.get('/', findAllMas)
 
+//getby id
+router.get('/:id',)
+
+
+
 //insert
 router.post("/new",createMascotas);
 

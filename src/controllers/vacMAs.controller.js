@@ -1,11 +1,12 @@
-import Mascotas from "../models/Mascotas.js";
+import VacunaMas from '../models/Vacuna_mascota.js';
 
-//insert 
-export const createMascotas=async (req,res)=>{
+
+export const createMasDetail=async (req,res)=>{
     try {
-        const anim=new Mascotas(req.body)
-        const animSaved= await anim.save()
-        return res.json(animSaved)
+        const  vacmas=new VacunaMas(req.body)
+        const vacmasSaved= await vacmas.save()
+        return res.json(vacmasSaved)
+
     } catch (error) {
         res.status(500).json({
             message: error.message || "Something went wrong creating the animal",
@@ -14,7 +15,7 @@ export const createMascotas=async (req,res)=>{
 }
 
 //update 
-export const updateMas=async(req,res)=>{
+export const updateMasDetail=async(req,res)=>{
       if(!req.body){
           return res.status(400).send({
             message:"Data update cannot bet empty"
@@ -24,7 +25,7 @@ export const updateMas=async(req,res)=>{
       const {id}=req.params;
 
       try {
-        const update=await Mascotas.findByIdAndUpdate(id,req.body);
+        const update=await VacunaMas.findByIdAndUpdate(id,req.body);
       
         if (!update)
             return res.status(404).json({
@@ -41,10 +42,10 @@ export const updateMas=async(req,res)=>{
 }
 
 //find all
-export const findAllMas=async(req,res)=>{
+export const findAllMasDetail=async(req,res)=>{
     try {
-      const pet=await Mascotas.find();  
-      return res.json(pet)
+      const vm=await VacunaMas.find();  
+      return res.json(vm)
     } catch (error) {
       res.status(500).json({
         message: error.message || "Something went wrong retrieving the  pets",
@@ -52,20 +53,12 @@ export const findAllMas=async(req,res)=>{
     }
 }
 
-
-
-
-//email and password
-
-
-
-//finde by emali and password
 //delete
-export const deleteMas=async (req,res)=>{
+export const deleteMasDetail=async (req,res)=>{
    const id=req.params.id;
 
    try {
-     const data=await Mascotas.findByIdAndDelete(id);
+     const data=await VacunaMas.findByIdAndDelete(id);
      
   
      if(!data){
@@ -83,11 +76,3 @@ export const deleteMas=async (req,res)=>{
     });
    }
 }
-
-
-//find by id
-export const byID = async ()=>{
-
-  
-}
-
