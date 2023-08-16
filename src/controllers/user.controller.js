@@ -44,11 +44,24 @@ export const updateUser=async(req,res)=>{
 export const findAllUser=async(req,res)=>{
     try {
       const users=await usuarios.find();  
+      
       return res.json(users)
     } catch (error) {
       res.status(500).json({
         message: error.message || "Something went wrong retrieving the users",
       }); 
+    }
+}
+
+export const findById=async(req,res)=>{
+    const {id}=req.params;
+    try {
+      const users=await usuarios.findById(id)
+      return res.json(users);   
+    } catch (error) {
+      res.status(500).json({
+        message: error.message || "Something went wrong retrieving the users",
+      });
     }
 }
 

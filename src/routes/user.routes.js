@@ -4,7 +4,8 @@ import {
  updateUser,
  deleteUser,
  findAllUser,
- log
+ log,
+ findById
 }from '../controllers/user.controller.js'
 
 
@@ -15,6 +16,9 @@ const router=Router();
 
 //get
 router.get('/',findAllUser)
+
+
+router.get('/:id',findById)
 
 //insert
 router.post("/new",createUser);
