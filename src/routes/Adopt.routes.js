@@ -3,7 +3,6 @@ import {
  findAllAdop,
  createAdopt,
  deleteAdop,
- findById,
  updateAdop,
  findByUser
 } from '../controllers/adop.controller.js'
@@ -17,11 +16,13 @@ const router=Router();
 //get
 router.get('/',findAllAdop)
 
+//by user
+router.get('/byUser/:id',findByUser)
 
-router.get('/byUser/:user',findByUser);
 
 
-router.get('/:id',findById)
+
+router.get('/:id',findByUser)
 
 //insert
 router.post("/new",createAdopt);

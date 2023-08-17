@@ -5,7 +5,7 @@ import router from './routes/index.js';
 const app=express();
 
 //setting
-app.set("port",process.env.PORT||3000);
+app.set("port",process.env.PORT||8000);
 
 
 

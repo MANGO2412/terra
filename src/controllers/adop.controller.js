@@ -1,5 +1,5 @@
 import Adopcion from "../models/Adopcion.js";
-
+import mongoose, { ObjectId } from "mongoose";
 //insert 
 export const createAdopt=async (req,res)=>{
     const data=req.body;
@@ -45,7 +45,30 @@ export const updateAdop=async(req,res)=>{
 //find all
 export const findAllAdop=async(req,res)=>{
     try {
-      const adop=await Adopcion.find();  
+      const adop=await Adopcion.aggregate([
+        {
+          $lookup: {
+            from: "usuarios",
+            localField: "usuario",
+            foreignField: "_id",
+            as: "informacionUsuario",
+          },
+        },
+        {
+          $lookup: {
+            from: "mascotas",
+            localField: "mascota",
+            foreignField: "_id",
+            as: "informacionMascota",
+          },
+        },
+        {
+          $unwind: "$informacionUsuario",
+        },
+        {
+          $unwind: "$informacionMascota",
+        },
+       ]);  
       return res.json(adop)
     } catch (error) {
       res.status(500).json({
@@ -57,7 +80,45 @@ export const findAllAdop=async(req,res)=>{
 
 
 
-//email and password
+//show list adoption
+export const  findByUser=async (req,res)=>{
+   try {
+    const usuarioId =new  mongoose.Types.ObjectId(req.params.id)
+     const adop=await Adopcion.aggregate([
+      {
+        $lookup: {
+          from: "usuarios",
+          localField: "usuario",
+          foreignField: "_id",
+          as: "informacionUsuario",
+        },
+      },
+      {
+        $lookup: {
+          from: "mascotas",
+          localField: "mascota",
+          foreignField: "_id",
+          as: "informacionMascota",
+        },
+      },
+      {
+        $match: { usuario: usuarioId },
+      },
+      {
+        $unwind: "$informacionUsuario",
+      },
+      {
+        $unwind: "$informacionMascota",
+      },
+     ])
+
+     res.json(adop)
+   } catch (error) {
+    res.status(500).json({
+      message: error.message || "Something went wrong retrieving the  pets",
+    }); 
+   }
+}
 
 
 
@@ -87,28 +148,3 @@ export const deleteAdop=async (req,res)=>{
 }
 
 
-
-export const findById=async(req,res)=>{
-    const {id}=req.params;
-    try {
-      const adop=await usuarios.findById(id)
-      return res.json(adop);   
-    } catch (error) {
-      res.status(500).json({
-        message: error.message || "Something went wrong retrieving the users",
-      });
-    }
-}
-
-
-export const findByUser=async(req,res)=>{
-    const {user}=req.params;
-    try {
-      const adop=await usuarios.find({user})
-      return res.json(adop);   
-    } catch (error) {
-      res.status(500).json({
-        message: error.message || "Something went wrong retrieving the users",
-      });
-    }
-}
